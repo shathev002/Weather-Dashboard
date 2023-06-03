@@ -9,18 +9,19 @@ var humidity = document.querySelector('.humidity');
 var futureWeatherHeader = document.querySelector('#futureWeatherHeader');
 var futureWeatherBox = document.querySelector('#futureWeatherBox');
 var weatherAPIKey = 'bf19735f435ce22b8b0b5b013236e4cc';
-var city = 'Toronto';
-var locationUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${weatherAPIKey}`;
+// var city = 'Toronto';
+
 
 //Search button
 
-// searchBtn.addEventListener('click', function(event) {
-// event.preventDefault();
-// var city = textBox.value;
-// displayWeather(city);
+searchLocation.addEventListener('submit', function(event) {
+  event.preventDefault();
+  var city = textBox.value;
+  displayWeather(city);
 
-// })
-// function displayWeather() {
+});
+function displayWeather(city) {
+  var locationUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${weatherAPIKey}`;
   fetch(locationUrl) 
   .then(function(response) {
     console.log(response);
@@ -38,7 +39,7 @@ fetch(weatherUrl)
   .then(function(weatherData){
     console.log(weatherData);
     console.log(weatherData.list);
-    var city = weatherData.city;
+    var city = textBox.value;
     for (var i = 0; i < weatherData.list.length; i++) {
       temp.textContent = "Temperature: " + weatherData.list[i].main.temp;
       wind.textContent = "Wind: " + weatherData.list[i].wind.speed;
@@ -67,7 +68,12 @@ fetch(weatherUrl)
       futureWind.textContent = 'Wind: ' + weatherData.list[i].wind.speed;
       var futureHumidity = document.createElement('p');
       futureHumidity.textContent = 'Humidity: ' + weatherData.list[i].main.humidity;
+      fiveDaysContent.append(h3, futureTemp, futureWind, futureHumidity);
+      fiveDays.append(fiveDaysContent);
+      col.append(fiveDays);
+      futureWeatherBox.append(col);
     }
+
   })
 
 
@@ -75,7 +81,7 @@ fetch(weatherUrl)
 
 });
 
-// }
+}
 
 
 
