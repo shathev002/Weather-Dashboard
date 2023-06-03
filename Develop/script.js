@@ -29,9 +29,13 @@ fetch(weatherUrl)
   .then(function(weatherData){
     console.log(weatherData);
     console.log(weatherData.list);
-    temp.textContent = "Temperature: " + weatherData.list[0].main.temp;
-    wind.textContent = "Wind: " + weatherData.list[0].wind.speed;
-    humidity.textContent = 'Humidity: ' + weatherData.list[0].main.humidity;
+    for (var i = 0; i < weatherData.list.length; i++) {
+      temp.textContent = "Temperature: " + weatherData.list[i].main.temp;
+      wind.textContent = "Wind: " + weatherData.list[i].wind.speed;
+      humidity.textContent = 'Humidity: ' + weatherData.list[i].main.humidity;
+
+    }
+   
     var currentDate = dayjs().format('MM/DD/YYYY');
     currentWeatherHeader.textContent = city + currentDate;
     console.log(currentWeatherHeader);
