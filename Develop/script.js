@@ -28,10 +28,10 @@ fetch(weatherUrl)
   .then(function(response) {return response.json();})
   .then(function(weatherData){
     console.log(weatherData);
-    temp.textContent = "Temperature: " + weatherData.list.main.temp;
-    console.log(weatherData.list.main);
-    wind.textContent = "Wind: " + weatherData.list.wind.speed;
-    humidity.textContent = 'Humidity: ' + weatherData.list.main.humidity;
+    console.log(weatherData.list);
+    temp.textContent = "Temperature: " + weatherData.list[0].main.temp;
+    wind.textContent = "Wind: " + weatherData.list[0].wind.speed;
+    humidity.textContent = 'Humidity: ' + weatherData.list[0].main.humidity;
     var currentDate = dayjs().format('MM/DD/YYYY');
     currentWeatherHeader.textContent = city + currentDate;
     console.log(currentWeatherHeader);
