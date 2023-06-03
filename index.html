@@ -22,16 +22,29 @@
    
       
       <div class="searchBox">
-        <form>
+        <form id="searchLocation">
         <label for="cityname" class="form-label">Search for a City: </label><br>
         <input type="text" class="textBox"><br>
         <button type="search" class="searchBtn">Submit</button>
       </form>
       </div>
+     
       
+    <div id="weatherInfo">
+      <div class="box currentWeather" id="currentWeatherBox">
+        <div class="boxContent">
+          <h2 class="currentWeatherHeader"></h2>
+          <p class="temp"></p>
+          <p class="wind"></p>
+          <p class="humidity"></p>
+        </div>
+      </div>
+      <h2 id="futureWeatherHeader"></h2>
+      <div class="row" id="futureWeatherBox">
+
+      </div>
+    </div>   
     
-
-
   </div>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
