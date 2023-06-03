@@ -14,7 +14,7 @@ fetch(locationUrl)
 var lat = locationData[0].lat;
 var lon = locationData[0].lon;
 console.log(lat, lon);
-var weatherUrl = `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherAPIKey}`;
+var weatherUrl = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${weatherAPIKey}`;
 fetch(weatherUrl)
   .then(function(response) {return response.json();})
   .then(function(weatherData){
