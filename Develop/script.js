@@ -10,7 +10,7 @@ var futureWeatherHeader = document.querySelector('#futureWeatherHeader');
 var futureWeatherBox = document.querySelector('#futureWeatherBox');
 var weatherAPIKey = 'bf19735f435ce22b8b0b5b013236e4cc';
 var searchHistoryContent = document.querySelector('.searchHistoryContent');
-
+var searchHistory = JSON.parse(localStorage.getItem('searchHistoryData')) || [];
 // var city = 'Toronto';
 
 
@@ -20,7 +20,7 @@ searchLocation.addEventListener('submit', function(event) {
   event.preventDefault();
   var city = textBox.value;
   displayWeather(city);
-
+  storeWeatherData(city);
 });
 function displayWeather(city) {
   var locationUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${weatherAPIKey}`;
@@ -74,6 +74,7 @@ fetch(weatherUrl)
       fiveDays.append(fiveDaysContent);
       col.append(fiveDays);
       futureWeatherBox.append(col);
+    
     }
 
   })
@@ -85,8 +86,28 @@ fetch(weatherUrl)
 
 }
 
+// save data in local storage
+function storeWeatherData(city) {
+  searchHistory.push(city);
+  localStorage.setItem('searchHistoryData', JSON.stringify(searchHistory));
+  searchHistoryContent.innerHTML = '';
+  for (var i =0; i < searchHistory.length; i++) { 
+    var searchHistorybtn = document.createElement('button');
+    searchHistorybtn.textContent = searchHistory[i];
+    searchHistorybtn.classList.add('searchHistory');
+    searchHistorybtn.setAttribute('weatherDataCity', searchHistory[i]);
+    searchHistoryContent.append(searchHistorybtn);
+  }
+
+};
 
 
+
+searchHistoryContent.addEventListener('click', function(event) {
+
+var city = event.target.getAttribute('weatherDataCity');
+displayWeather(city);
+})
 
 
 
