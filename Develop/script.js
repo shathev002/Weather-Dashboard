@@ -9,6 +9,8 @@ var humidity = document.querySelector('.humidity');
 var futureWeatherHeader = document.querySelector('#futureWeatherHeader');
 var futureWeatherBox = document.querySelector('#futureWeatherBox');
 var weatherAPIKey = 'bf19735f435ce22b8b0b5b013236e4cc';
+var searchHistoryContent = document.querySelector('.searchHistoryContent');
+
 // var city = 'Toronto';
 
 
@@ -53,7 +55,7 @@ fetch(weatherUrl)
     futureWeatherHeader.textContent = '5 Day Forecast:';
     futureWeatherBox.innerHTML = ''; //reset info
 
-    for (var i = 0; i < weatherData.list.length; i++) {
+      for (var i = 0; i < 5; i++) {
       var col = document.createElement('div');
       col.setAttribute('class', 'col');
       var fiveDays = document.createElement('div');
@@ -82,6 +84,7 @@ fetch(weatherUrl)
 });
 
 }
+
 
 
 
