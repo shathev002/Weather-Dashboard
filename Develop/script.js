@@ -41,7 +41,8 @@ fetch(weatherUrl)
   .then(function(weatherData){
     console.log(weatherData);
     console.log(weatherData.list);
-    var city = textBox.value;
+
+    //var city = textBox.value;
     for (var i = 0; i < weatherData.list.length; i++) {
       temp.textContent = "Temperature: " + weatherData.list[i].main.temp;
       wind.textContent = "Wind: " + weatherData.list[i].wind.speed;
@@ -51,11 +52,14 @@ fetch(weatherUrl)
    
     var currentDate = dayjs().format('MM/DD/YYYY');
     currentWeatherHeader.textContent = city + currentDate;
+    document.getElementById('icon').innerHTML =`
+    <img src="http://openweathermap.org/img/wn/${weatherData.list[0].weather[0].icon}@2x.png"/>
+    ` 
     console.log(currentWeatherHeader);
     futureWeatherHeader.textContent = '5 Day Forecast:';
     futureWeatherBox.innerHTML = ''; //reset info
 
-      for (var i = 0; i < 5; i++) {
+      for (var i = 2; i < 40; i=i+8) {
       var col = document.createElement('div');
       col.setAttribute('class', 'col');
       var fiveDays = document.createElement('div');
@@ -63,14 +67,17 @@ fetch(weatherUrl)
       var fiveDaysContent = document.createElement('div');
       fiveDaysContent.setAttribute('class', 'fiveDaysContent');
       var h3 = document.createElement('h3');
-      h3.textContent = dayjs(weatherData).format('MM/DD/YYYY');
+     // h3.textContent = dayjs(weatherData).format('MM/DD/YYYY');
+      h3.textContent =weatherData.list[i].dt_txt.substring(0,10)
       var futureTemp = document.createElement('p');
       futureTemp.textContent = 'Temp: ' + weatherData.list[i].main.temp;
       var futureWind = document.createElement('p');
       futureWind.textContent = 'Wind: ' + weatherData.list[i].wind.speed;
       var futureHumidity = document.createElement('p');
       futureHumidity.textContent = 'Humidity: ' + weatherData.list[i].main.humidity;
-      fiveDaysContent.append(h3, futureTemp, futureWind, futureHumidity);
+      var icon = document.createElement('div');
+      icon.innerHTML = `<img src="http://openweathermap.org/img/wn/${weatherData.list[i].weather[0].icon}@2x.png"/>`
+      fiveDaysContent.append(h3, futureTemp, futureWind, futureHumidity, icon);
       fiveDays.append(fiveDaysContent);
       col.append(fiveDays);
       futureWeatherBox.append(col);
