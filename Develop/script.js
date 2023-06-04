@@ -51,7 +51,7 @@ fetch(weatherUrl)
     }
    
     var currentDate = dayjs().format('MM/DD/YYYY');
-    currentWeatherHeader.textContent = city + currentDate;
+    currentWeatherHeader.textContent = city + '\n' + currentDate;
     document.getElementById('icon').innerHTML =`
     <img src="http://openweathermap.org/img/wn/${weatherData.list[0].weather[0].icon}@2x.png"/>
     ` 
@@ -77,7 +77,7 @@ fetch(weatherUrl)
       futureHumidity.textContent = 'Humidity: ' + weatherData.list[i].main.humidity;
       var icon = document.createElement('div');
       icon.innerHTML = `<img src="http://openweathermap.org/img/wn/${weatherData.list[i].weather[0].icon}@2x.png"/>`
-      fiveDaysContent.append(h3, futureTemp, futureWind, futureHumidity, icon);
+      fiveDaysContent.append(h3, icon, futureTemp, futureWind, futureHumidity);
       fiveDays.append(fiveDaysContent);
       col.append(fiveDays);
       futureWeatherBox.append(col);
